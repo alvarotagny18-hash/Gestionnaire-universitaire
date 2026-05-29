@@ -1,1 +1,103 @@
-<p>etudiants works!</p>
+<div class="app-layout">
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content">
+    
+    <div class="top-navbar">
+      <h2>Gestion des Étudiants</h2>
+      <div class="navbar-right">
+        <span class="welcome">Bienvenue, Admin 👋</span>
+        <div class="avatar">A</div>
+      </div>
+    </div>
+
+    <div class="page-body">
+
+      <!-- Barre d'actions -->
+      <div class="actions-bar animate__animated animate__fadeInDown">
+        <input 
+          type="text" 
+          placeholder="🔍 Rechercher un étudiant..." 
+          class="search-input"
+          [(ngModel)]="searchText"
+        />
+        <button class="btn-add" (click)="openForm()">
+          + Ajouter un étudiant
+        </button>
+      </div>
+
+      <!-- Formulaire d'ajout/modification -->
+      @if (showForm) {
+        <div class="form-card animate__animated animate__fadeInDown">
+          <h3>{{ isEditing ? 'Modifier' : 'Ajouter' }} un étudiant</h3>
+          <div class="form-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Nom complet</mat-label>
+              <input matInput [(ngModel)]="currentEtudiant.nom">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput [(ngModel)]="currentEtudiant.email">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Filière</mat-label>
+              <input matInput [(ngModel)]="currentEtudiant.filiere">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Niveau</mat-label>
+              <mat-select [(ngModel)]="currentEtudiant.niveau">
+                <mat-option value="Licence 1">Licence 1</mat-option>
+                <mat-option value="Licence 2">Licence 2</mat-option>
+                <mat-option value="Licence 3">Licence 3</mat-option>
+                <mat-option value="Master 1">Master 1</mat-option>
+                <mat-option value="Master 2">Master 2</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-actions">
+            <button class="btn-cancel" (click)="closeForm()">Annuler</button>
+            <button class="btn-save" (click)="saveEtudiant()">
+              {{ isEditing ? 'Modifier' : 'Enregistrer' }}
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- Tableau des étudiants -->
+      <div class="table-card animate__animated animate__fadeInUp">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Filière</th>
+              <th>Niveau</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (etudiant of filteredEtudiants(); track etudiant.id) {
+              <tr class="animate__animated animate__fadeIn">
+                <td>{{ etudiant.nom }}</td>
+                <td>{{ etudiant.email }}</td>
+                <td>{{ etudiant.filiere }}</td>
+                <td>{{ etudiant.niveau }}</td>
+                <td>
+                  <span class="badge" [class.active]="etudiant.actif" [class.inactive]="!etudiant.actif">
+                    {{ etudiant.actif ? 'Actif' : 'Inactif' }}
+                  </span>
+                </td>
+                <td class="actions">
+                  <button class="btn-edit" (click)="editEtudiant(etudiant)">✏️</button>
+                  <button class="btn-delete" (click)="deleteEtudiant(etudiant.id)">🗑️</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
