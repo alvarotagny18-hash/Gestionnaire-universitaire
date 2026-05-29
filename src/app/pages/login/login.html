@@ -1,0 +1,37 @@
+
+<div class="login-container">
+  <div class="login-card animate__animated animate__fadeInDown">
+    
+    <div class="login-header">
+      <div class="logo">
+        <span class="logo-icon">🎓</span>
+        <h1>UniGest</h1>
+      </div>
+      <p>Système de Gestion Universitaire</p>
+    </div>
+
+    <form class="login-form">
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" placeholder="votre@email.com">
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput type="password" placeholder="••••••••">
+          <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <button class="login-btn" type="submit" (click)="onLogin()">
+        Se connecter
+      </button>
+
+    </form>
+
+  </div>
+</div>
