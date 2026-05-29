@@ -1,1 +1,103 @@
-<p>dashboard works!</p>
+<div class="app-layout">
+  
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content" [class.expanded]="isSidebarCollapsed">
+    
+    <div class="top-navbar">
+      <h2>Tableau de bord</h2>
+      <div class="navbar-right">
+        <span class="welcome">Bienvenue, Admin 👋</span>
+        <div class="avatar">A</div>
+      </div>
+    </div>
+
+    <div class="dashboard-body">
+
+      <!-- Cartes statistiques -->
+      <div class="stats-grid">
+        <div class="stat-card animate__animated animate__fadeInUp">
+          <div class="stat-icon blue">
+            <mat-icon>school</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3>1 248</h3>
+            <p>Étudiants</p>
+          </div>
+        </div>
+
+        <div class="stat-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+          <div class="stat-icon purple">
+            <mat-icon>person</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3>86</h3>
+            <p>Professeurs</p>
+          </div>
+        </div>
+
+        <div class="stat-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+          <div class="stat-icon cyan">
+            <mat-icon>book</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3>42</h3>
+            <p>Cours</p>
+          </div>
+        </div>
+
+        <div class="stat-card animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
+          <div class="stat-icon green">
+            <mat-icon>grade</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3>78%</h3>
+            <p>Taux de réussite</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tableau des derniers étudiants -->
+      <div class="recent-section animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+        <h3>Derniers étudiants inscrits</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Filière</th>
+              <th>Niveau</th>
+              <th>Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kamga Jean</td>
+              <td>Informatique</td>
+              <td>Licence 1</td>
+              <td><span class="badge active">Actif</span></td>
+            </tr>
+            <tr>
+              <td>Nguemo Marie</td>
+              <td>Mathématiques</td>
+              <td>Master 1</td>
+              <td><span class="badge active">Actif</span></td>
+            </tr>
+            <tr>
+              <td>Talla Pierre</td>
+              <td>Physique</td>
+              <td>Licence 3</td>
+              <td><span class="badge inactive">Inactif</span></td>
+            </tr>
+            <tr>
+              <td>Foko Sarah</td>
+              <td>Chimie</td>
+              <td>Licence 2</td>
+              <td><span class="badge active">Actif</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,1 +1,47 @@
-<p>sidebar works!</p>
+<div class="sidebar" [class.collapsed]="isCollapsed">
+  
+  <div class="sidebar-header">
+    <span class="logo-icon">🎓</span>
+    @if (!isCollapsed) {
+      <span class="logo-text">UniGest</span>
+    }
+    <button class="toggle-btn" (click)="toggleSidebar()">
+      <mat-icon>{{ isCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+    </button>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-item" routerLink="/dashboard" routerLinkActive="active">
+      <mat-icon>dashboard</mat-icon>
+      @if (!isCollapsed) { <span>Dashboard</span> }
+    </a>
+    <a class="nav-item" routerLink="/etudiants" routerLinkActive="active">
+      <mat-icon>school</mat-icon>
+      @if (!isCollapsed) { <span>Étudiants</span> }
+    </a>
+    <a class="nav-item" routerLink="/professeurs" routerLinkActive="active">
+      <mat-icon>person</mat-icon>
+      @if (!isCollapsed) { <span>Professeurs</span> }
+    </a>
+    <a class="nav-item" routerLink="/cours" routerLinkActive="active">
+      <mat-icon>book</mat-icon>
+      @if (!isCollapsed) { <span>Cours</span> }
+    </a>
+    <a class="nav-item" routerLink="/notes" routerLinkActive="active">
+      <mat-icon>grade</mat-icon>
+      @if (!isCollapsed) { <span>Notes</span> }
+    </a>
+    <a class="nav-item" routerLink="/emploi-du-temps" routerLinkActive="active">
+      <mat-icon>calendar_month</mat-icon>
+      @if (!isCollapsed) { <span>Emploi du temps</span> }
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a class="nav-item logout" routerLink="/login">
+      <mat-icon>logout</mat-icon>
+      @if (!isCollapsed) { <span>Déconnexion</span> }
+    </a>
+  </div>
+
+</div>
