@@ -1,1 +1,93 @@
-<p>professeurs works!</p>
+<div class="app-layout">
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content">
+    
+    <div class="top-navbar">
+      <h2>Gestion des Professeurs</h2>
+      <div class="navbar-right">
+        <span class="welcome">Bienvenue, Admin 👋</span>
+        <div class="avatar">A</div>
+      </div>
+    </div>
+
+    <div class="page-body">
+
+      <div class="actions-bar animate__animated animate__fadeInDown">
+        <input 
+          type="text" 
+          placeholder="🔍 Rechercher un professeur..." 
+          class="search-input"
+          [(ngModel)]="searchText"
+        />
+        <button class="btn-add" (click)="openForm()">
+          + Ajouter un professeur
+        </button>
+      </div>
+
+      @if (showForm) {
+        <div class="form-card animate__animated animate__fadeInDown">
+          <h3>{{ isEditing ? 'Modifier' : 'Ajouter' }} un professeur</h3>
+          <div class="form-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Nom complet</mat-label>
+              <input matInput [(ngModel)]="currentProfesseur.nom">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput [(ngModel)]="currentProfesseur.email">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Spécialité</mat-label>
+              <input matInput [(ngModel)]="currentProfesseur.specialite">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Grade</mat-label>
+              <mat-select [(ngModel)]="currentProfesseur.grade">
+                <mat-option value="Assistant">Assistant</mat-option>
+                <mat-option value="Chargé de cours">Chargé de cours</mat-option>
+                <mat-option value="Maître de conférences">Maître de conférences</mat-option>
+                <mat-option value="Professeur">Professeur</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-actions">
+            <button class="btn-cancel" (click)="closeForm()">Annuler</button>
+            <button class="btn-save" (click)="saveProfesseur()">
+              {{ isEditing ? 'Modifier' : 'Enregistrer' }}
+            </button>
+          </div>
+        </div>
+      }
+
+      <div class="table-card animate__animated animate__fadeInUp">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Spécialité</th>
+              <th>Grade</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (professeur of filteredProfesseurs(); track professeur.id) {
+              <tr class="animate__animated animate__fadeIn">
+                <td>{{ professeur.nom }}</td>
+                <td>{{ professeur.email }}</td>
+                <td>{{ professeur.specialite }}</td>
+                <td><span class="badge-grade">{{ professeur.grade }}</span></td>
+                <td class="actions">
+                  <button class="btn-edit" (click)="editProfesseur(professeur)">✏️</button>
+                  <button class="btn-delete" (click)="deleteProfesseur(professeur.id)">🗑️</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
