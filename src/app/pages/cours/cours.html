@@ -1,1 +1,103 @@
-<p>cours works!</p>
+<div class="app-layout">
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content">
+    
+    <div class="top-navbar">
+      <h2>Gestion des Cours</h2>
+      <div class="navbar-right">
+        <span class="welcome">Bienvenue, Admin 👋</span>
+        <div class="avatar">A</div>
+      </div>
+    </div>
+
+    <div class="page-body">
+
+      <div class="actions-bar animate__animated animate__fadeInDown">
+        <input 
+          type="text" 
+          placeholder="🔍 Rechercher un cours..." 
+          class="search-input"
+          [(ngModel)]="searchText"
+        />
+        <button class="btn-add" (click)="openForm()">
+          + Ajouter un cours
+        </button>
+      </div>
+
+      @if (showForm) {
+        <div class="form-card animate__animated animate__fadeInDown">
+          <h3>{{ isEditing ? 'Modifier' : 'Ajouter' }} un cours</h3>
+          <div class="form-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Intitulé du cours</mat-label>
+              <input matInput [(ngModel)]="currentCours.intitule">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Professeur</mat-label>
+              <input matInput [(ngModel)]="currentCours.professeur">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Filière</mat-label>
+              <input matInput [(ngModel)]="currentCours.filiere">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Crédits</mat-label>
+              <input matInput type="number" [(ngModel)]="currentCours.credits">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Semestre</mat-label>
+              <mat-select [(ngModel)]="currentCours.semestre">
+                <mat-option value="Semestre 1">Semestre 1</mat-option>
+                <mat-option value="Semestre 2">Semestre 2</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Volume horaire (h)</mat-label>
+              <input matInput type="number" [(ngModel)]="currentCours.volume">
+            </mat-form-field>
+          </div>
+          <div class="form-actions">
+            <button class="btn-cancel" (click)="closeForm()">Annuler</button>
+            <button class="btn-save" (click)="saveCours()">
+              {{ isEditing ? 'Modifier' : 'Enregistrer' }}
+            </button>
+          </div>
+        </div>
+      }
+
+      <div class="table-card animate__animated animate__fadeInUp">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Intitulé</th>
+              <th>Professeur</th>
+              <th>Filière</th>
+              <th>Crédits</th>
+              <th>Semestre</th>
+              <th>Volume</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (cours of filteredCours(); track cours.id) {
+              <tr class="animate__animated animate__fadeIn">
+                <td>{{ cours.intitule }}</td>
+                <td>{{ cours.professeur }}</td>
+                <td>{{ cours.filiere }}</td>
+                <td><span class="badge-credits">{{ cours.credits }} cr</span></td>
+                <td>{{ cours.semestre }}</td>
+                <td>{{ cours.volume }}h</td>
+                <td class="actions">
+                  <button class="btn-edit" (click)="editCours(cours)">✏️</button>
+                  <button class="btn-delete" (click)="deleteCours(cours.id)">🗑️</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
